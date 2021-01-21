@@ -16,5 +16,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: auth unit testing
+      - name: run unit testing of auth
         uses: cd auth && npm install && npm run test:ci

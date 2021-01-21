@@ -8,7 +8,6 @@ jobs:
     name: deploy auth service
     runs-on: ubuntu-latest
     env:
-      PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
@@ -17,13 +16,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: build docker image
-        run: cd auth && docker build -t $DOCKER_USERNAME/$PROJECT_NAME-auth .
+        run: cd auth && docker build -t $DOCKER_USERNAME/passmanager-auth .
       
       - name: login docker hub
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: push image to docker hub
-        run: docker push $DOCKER_USERNAME/$PROJECT_NAME-auth
+        run: docker push $DOCKER_USERNAME/passmanager-auth
       
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -31,7 +30,7 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
     
       - name: change kubectl context to digitalocean
-        run: doctl kubernetes cluster kubeconfig save $PROJECT_NAME
+        run: doctl kubernetes cluster kubeconfig save passmanager
       
       - name: update deployment
         run: kubectl rollout restart deployment auth-deployment
