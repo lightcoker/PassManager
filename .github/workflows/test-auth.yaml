@@ -1,0 +1,20 @@
+name: tests-auth
+
+on:
+  push:
+    branches:
+      - main 
+    paths:
+      - "auth/**"
+
+jobs:
+  build:
+    name: testing auth service
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: auth unit testing
+        uses: cd auth && npm install && npm run test:ci
