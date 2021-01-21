@@ -7,6 +7,7 @@ export interface PasswordUpdatedEvent {
     userId: string;
     password: string;
     domain: string;
+    updatedAt: string;
     version: number;
   };
 }
