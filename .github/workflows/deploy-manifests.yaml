@@ -1,9 +1,7 @@
 name: deploy-manifests
 
-on:
-  push:
-    branches:
-      - "main"
+# Manual event
+on: workflow_dispatch 
 
 jobs:
   build:
