@@ -39,7 +39,7 @@ jobs:
       - name: create secrets for postgres
         run: kubectl create secret generic postgrespassword --from-literal POSTGRES_PASSWORD=$POSTGRES_PASSWORD
         env:
-          MONGO_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       
       - name: create secrets for jwt
         run: kubectl create secret generic jwt-secret --from-literal JWT_KEY=$JWT_KEY
