@@ -20,7 +20,6 @@ export const setCurrentUser = (
   res: Response,
   next: NextFunction
 ) => {
-  // "!req.session?.jwt" 即 !req.session || !req.session.jwt
   if (!req.session?.jwt) {
     return next();
   }
