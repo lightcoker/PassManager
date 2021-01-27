@@ -22,7 +22,7 @@ spec:
             - name: NODE_ENV
               value: production
             - name: HOSTING_SITE
-              value: "http://albertapp.codes"
+              value: "http://www.albertapp.codes"
 ---
 apiVersion: v1
 kind: Service

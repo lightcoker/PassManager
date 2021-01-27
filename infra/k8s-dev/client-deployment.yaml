@@ -18,12 +18,14 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
-          # env:
-          #   - name: LINK_PREVIEW_KEY
-          #     valueFrom:
-          #       secretKeyRef:
-          #         name: lpkey
-          #         key: LINK_PREVIEW_KEY
+          env:
+            - name: HOSTING_SITE
+              value: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local"
+            # - name: LINK_PREVIEW_KEY
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: lpkey
+            #       key: LINK_PREVIEW_KEY
 ---
 apiVersion: v1
 kind: Service
