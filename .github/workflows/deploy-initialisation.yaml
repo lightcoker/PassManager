@@ -29,12 +29,17 @@ jobs:
         run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/do/deploy.yaml
 
       - name: deploy cert-manager
-        run:     kubectl create namespace cert-manager && kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
+        run: kubectl create namespace cert-manager && kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
 
       - name: create secrets for mongodb
         run: kubectl create secret generic mongopassword --from-literal MONGO_PASSWORD=$MONGO_PASSWORD
         env:
           MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+
+      - name: create secrets for postgres
+        run: kubectl create secret generic postgrespassword --from-literal POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+        env:
+          MONGO_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       
       - name: create secrets for jwt
         run: kubectl create secret generic jwt-secret --from-literal JWT_KEY=$JWT_KEY
