@@ -26,7 +26,7 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save passmanager
       
       - name: deploy ingress-nginx
-        run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/do/deploy.yaml
+        run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.34.1/deploy/static/provider/do/deploy.yaml
 
       - name: deploy cert-manager
         run: kubectl create namespace cert-manager && kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
