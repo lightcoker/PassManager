@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth # label for this deployment to find corresponding pods
+  template:
+    metadata:
+      labels:
+        app: auth # label for pods
+    spec:
+      containers:
+        - name: auth
+          image: lightcoker/passmanager-auth
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_HOST
+              value: auth-mongo-clusterip
+            - name: MONGO_USER
+              value: mongo
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongopassword
+                  key: MONGO_PASSWORD
+            - name: MONGO_DB_NAME
+              value: auth
+            - name: MONGO_PORT
+              value: "27017"
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-clusterip:4222'
+            - name: NATS_CLUSTER_ID
+              value: passmanager
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: auth-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: auth
+  ports:
+    - name: auth
+      protocol: TCP
+      port: 3000
+      targetPort: 3000 

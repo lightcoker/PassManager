@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    # nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+spec:
+  rules:
+    - host: passmanager.dev
+      http:
+        paths:
+          - path: /api/users/?(.*)
+            backend:
+              serviceName: auth-clusterip
+              servicePort: 3000
+          - path: /api/password/?(.*)
+            backend:
+              serviceName: password-clusterip
+              servicePort: 3000
+          - path: /api/query/?(.*)
+            backend:
+              serviceName: query-clusterip
+              servicePort: 3000
+          - path: /?(.*)
+            backend:
+              serviceName: client-clusterip
+              servicePort: 3000

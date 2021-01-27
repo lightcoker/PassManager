@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: query # label for this deployment to find corresponding pods
+  template:
+    metadata:
+      labels:
+        app: query # label for pods
+    spec:
+      containers:
+        - name: query
+          image: lightcoker/passmanager-query
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_HOST
+              value: query-mongo-clusterip
+            - name: MONGO_USER
+              value: mongo
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongopassword
+                  key: MONGO_PASSWORD
+            - name: MONGO_DB_NAME
+              value: password
+            - name: MONGO_PORT
+              value: "27017"
+            - name: PGUSER
+              value: postgres
+            - name: PGHOST
+              value: query-postgres-clusterip
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgrespassword
+                  key: POSTGRES_PASSWORD
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-clusterip:4222'
+            - name: NATS_CLUSTER_ID
+              value: passmanager
+            - name: REDIS_HOST
+              value: query-redis-clusterip
+            - name: REDIS_PORT
+              value: "6379"
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: query-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: query
+  ports:
+    - name: query
+      protocol: TCP
+      port: 3000
+      targetPort: 3000 

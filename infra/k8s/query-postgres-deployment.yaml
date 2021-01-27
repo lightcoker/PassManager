@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: query-postgres
+  template:
+    metadata:
+      labels:
+        app: query-postgres
+    spec:
+      containers:
+        - name: query-postgres
+          image: postgres # registry.hub.docker.com/library/postgres
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432 # PostgresSQL port
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgrespassword
+                  key: POSTGRES_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: query-postgres-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: query-postgres
+  ports:
+    - name: query-db
+      protocol: TCP
+      port: 5432 # postgres default port
+      targetPort: 5432 
