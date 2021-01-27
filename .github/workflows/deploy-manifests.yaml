@@ -1,0 +1,26 @@
+name: deploy-manifests
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    name: deploying all manifests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    
+      - name: change kubectl context to digitalocean
+        run: doctl kubernetes cluster kubeconfig save passmanager
+      
+      - name: deploy all manifests
+        run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod

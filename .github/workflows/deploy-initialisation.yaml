@@ -1,0 +1,44 @@
+name: deploy-initialisation
+
+# Manual event
+on: workflow_dispatch 
+
+jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  build:
+    # Name the Job
+    name: initialisation
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    
+      - name: change kubectl context to digitalocean
+        run: doctl kubernetes cluster kubeconfig save passmanager
+      
+      - name: deploy ingress-nginx
+        run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/do/deploy.yaml
+
+      - name: create secrets for mongodb
+        run: kubectl create secret generic mongopassword --from-literal MONGO_PASSWORD=$MONGO_PASSWORD
+        env:
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+      
+      - name: create secrets for jwt
+        run: kubectl create secret generic jwt-secret --from-literal JWT_KEY=$JWT_KEY
+        env:
+          JWT_KEY: ${{ secrets.JWT_KEY }}
+
+      # - name: create secrets for link preview API key
+      #   run: kubectl create secret generic lpkey --from-literal JWT_KEY=$LINK_PREVIEW_KEY
+      #   env:
+      #     JWT_KEY: ${{ secrets.LINK_PREVIEW_KEY }}
