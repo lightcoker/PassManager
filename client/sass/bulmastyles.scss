@@ -1,0 +1,9 @@
+@charset "utf-8";
+@import "../node_modules/bulma/bulma.sass";
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  width: 100%;
+}
