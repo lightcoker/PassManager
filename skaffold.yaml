@@ -1,0 +1,46 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  statusCheckDeadlineSeconds: 3600
+  kubectl: 
+    manifests:
+      - ./infra/k8s/*.yaml
+      - ./infra/k8s-dev/*.yaml
+build:
+  local:
+    push: false
+  artifacts:
+    - image: lightcoker/passmanager-auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: lightcoker/passmanager-password
+      context: password
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: lightcoker/passmanager-query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: lightcoker/passmanager-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .
+          - src: "**/*.scss"
+            dest: .
