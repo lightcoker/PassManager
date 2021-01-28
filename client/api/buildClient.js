@@ -1,10 +1,14 @@
 import axios from "axios";
+import getConfig from "next/config";
 
 export default ({ req }) => {
+  const { NODE_ENV, HOSTING_NAME } = getConfig();
+  console.log({ NODE_ENV, HOSTING_NAME });
+
   if (typeof window === "undefined") {
     // executed on server
     return axios.create({
-      baseURL: "http://www.albertapp.codes", // "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
+      baseURL: HOSTING_SITE, // "http://www.albertapp.codes" (dev) or "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local" (prod)
       headers: req.headers,
     });
   } else {
