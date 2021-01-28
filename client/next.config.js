@@ -5,7 +5,7 @@ module.exports = {
     config.watchOptions.poll = 1000;
     return config;
   },
-  publicRuntimeConfig: {
+  serverRuntimeConfig: {
     NODE_ENV: process.env.NODE_ENV,
     HOSTING_SITE: process.env.HOSTING_SITE,
   },
