@@ -7,6 +7,6 @@ module.exports = {
   },
   publicRuntimeConfig: {
     NODE_ENV: process.env.NODE_ENV,
-    HOSTING_NAME: process.env.HOSTING_SITE,
+    HOSTING_SITE: process.env.HOSTING_SITE,
   },
 };
