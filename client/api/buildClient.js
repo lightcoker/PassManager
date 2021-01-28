@@ -2,8 +2,8 @@ import axios from "axios";
 import getConfig from "next/config";
 
 export default ({ req }) => {
-  const { NODE_ENV, HOSTING_NAME } = getConfig();
-  console.log({ NODE_ENV, HOSTING_NAME });
+  const { NODE_ENV, HOSTING_SITE } = getConfig();
+  console.log({ NODE_ENV, HOSTING_SITE });
 
   if (typeof window === "undefined") {
     // executed on server
