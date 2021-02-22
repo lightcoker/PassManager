@@ -22,13 +22,13 @@ Continuous Integration/Continuous Deployment (CI/CD) is applied to introduce aut
 
 ## Architectural Pattern
 
-### Microservice Architecture
+##### Microservice Architecture
 
 - Each service can be developed, maintained and deployed independently. Backend services communicate with each other by events through NATS Streaming server as the event bus. 
 - Each service has only one major functionality. The authentication service provides registration and identification verification functionalities. The password service can generate and manage the password record. The query service serves read-only data for user and password records.
 - The code reuse is achieved by publishing common codes to npm as a package.  
 
-### Command and Query Responsibility Segregation (CQRS) pattern
+##### CQRS
 
 - CQRS separates reads and writes into different logic units. Query unit is for read operation. while command unit is for other operations.
   - The command unit includes authentication service and password service. Authentication service creates user records and password service creates and manage password records.
