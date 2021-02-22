@@ -8,7 +8,7 @@ const LandingPage = ({ currentUser }) => {
   const [length, setLength] = useState(32);
 
   const [isLoading, setIsLoading] = useState("not-loading");
-  const passwordMaxLength = 256;
+  const passwordMaxLength = 254;
   const getOptions = function () {
     const numbers = [];
     for (let i = 6; i <= passwordMaxLength; i++) {
