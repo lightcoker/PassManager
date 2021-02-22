@@ -70,8 +70,7 @@ const LandingPage = ({ currentUser }) => {
         </div>
         <div className="title is-2 is-hidden-tablet">Password Manager</div>
         <div className="subtitle is-5">
-          Generate a strong password below and click the button below to store
-          it.
+          Generate a random password and click the button below to store it.
         </div>
         <hr />
       </section>
