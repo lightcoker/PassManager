@@ -24,7 +24,7 @@ const EditPage = ({ passwordRecord, currentUser }) => {
       password,
       updatedAt: new Date(),
     },
-    onSuccess: () => router.push("/"),
+    onSuccess: () => router.push("/password"),
   });
 
   const onSubmit = async (event) => {

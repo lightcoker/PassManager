@@ -22,7 +22,7 @@ const SavePage = ({ currentUser }) => {
       domain,
       password,
     },
-    onSuccess: () => router.push("/"),
+    onSuccess: () => router.push("/password"),
   });
 
   const onSubmit = async (event) => {
