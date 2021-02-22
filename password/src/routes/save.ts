@@ -5,6 +5,8 @@ import { Password } from "../models/password";
 import { natsWrapper } from "../nats-wrapper";
 import { PasswordSavedPublisher } from "../events/publishers/password-saved-publisher";
 
+const MAX_LENGTH = 255;
+
 const router = express.Router();
 
 router.post(
@@ -12,7 +14,9 @@ router.post(
   requireAuth,
   [
     body("domain").not().isEmpty().withMessage("Domain is required."),
-    body("password").not().isEmpty().withMessage("Password is required."),
+    body("password")
+      .isLength({ min: 1, max: MAX_LENGTH })
+      .withMessage(`Password length should be between 1 and ${MAX_LENGTH}.`),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
