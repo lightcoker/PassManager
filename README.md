@@ -16,7 +16,7 @@ Continuous Integration/Continuous Deployment (CI/CD) is applied to introduce aut
 
 ## System Architecture
 
-
+<img src="https://raw.githubusercontent.com/lightcoker/passmanager/main/doc/img/Systems%20Architecture.png" alt="Systems Architecture" style="zoom:6%;" />
 
 ## Architectural Pattern
 
