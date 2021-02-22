@@ -7,7 +7,7 @@ import ArrayStrategy from "../password-strategies/array-strategy";
 // import CryptoStrategy from "../password-strategies/crypto-strategy";
 
 const MIN_LENGTH = 4;
-const MAX_LENGTH = 255;
+const MAX_LENGTH = 65;
 
 const router = express.Router();
 router.post(
