@@ -3,6 +3,7 @@ import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface PasswordAttrs {
   domain: string;
+  account: string;
   password: string;
   userId: string;
   updatedAt: Date;
@@ -10,6 +11,7 @@ interface PasswordAttrs {
 
 interface PasswordDoc extends mongoose.Document {
   domain: string;
+  account: string;
   password: string;
   userId: string;
   updatedAt: Date;
@@ -23,6 +25,10 @@ interface PasswordModel extends mongoose.Model<PasswordDoc> {
 const passwordSchema = new mongoose.Schema(
   {
     domain: {
+      type: String,
+      required: true,
+    },
+    account: {
       type: String,
       required: true,
     },

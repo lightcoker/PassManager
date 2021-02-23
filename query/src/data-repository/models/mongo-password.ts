@@ -5,6 +5,7 @@ import PasswordEntity from "../entities/password";
 // PasswordDoc is equivalent to:
 // interface PasswordDoc extends mongoose.Document {
 //   domain: string;
+//   account: string;
 //   password: string;
 //   userId: string;
 //   version: number;
@@ -20,6 +21,10 @@ interface PasswordModel extends mongoose.Model<PasswordDoc> {
 export const passwordSchema = new mongoose.Schema(
   {
     domain: {
+      type: String,
+      required: true,
+    },
+    account: {
       type: String,
       required: true,
     },
@@ -54,6 +59,7 @@ passwordSchema.statics.build = (attrs: Omit<PasswordEntity, "version">) => {
     _id: attrs.id,
     userId: attrs.userId,
     domain: attrs.domain,
+    account: attrs.account,
     password: attrs.password,
     updatedat: attrs.updatedAt,
   });

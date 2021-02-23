@@ -17,6 +17,7 @@ router.put(
   requireAuth,
   [
     body("domain").not().isEmpty().withMessage("Domain is required."),
+    body("account").not().isEmpty().withMessage("Account is required."),
     body("password").not().isEmpty().withMessage("Password is required."),
   ],
   validateRequest,
@@ -34,6 +35,7 @@ router.put(
     const updatedAt = new Date();
     passwordRecord.set({
       domain: req.body.domain,
+      account: req.body.account,
       password: req.body.password,
       updatedAt,
     });
@@ -42,8 +44,9 @@ router.put(
     await new PasswordUpdatedPublisher(natsWrapper.client).publish({
       id: passwordRecord.id,
       userId: req.currentUser!.id,
-      password: passwordRecord.password,
       domain: passwordRecord.domain,
+      account: passwordRecord.account,
+      password: passwordRecord.password,
       updatedAt: passwordRecord.updatedAt.toISOString(),
       version: passwordRecord.version,
     });

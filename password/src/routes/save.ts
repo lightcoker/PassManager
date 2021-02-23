@@ -14,16 +14,18 @@ router.post(
   requireAuth,
   [
     body("domain").not().isEmpty().withMessage("Domain is required."),
+    body("account").not().isEmpty().withMessage("Account is required."),
     body("password")
       .isLength({ min: 1, max: MAX_LENGTH })
       .withMessage(`Password length should be between 1 and ${MAX_LENGTH}.`),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { domain, password } = req.body;
+    const { domain, account, password } = req.body;
     const updatedAt = new Date();
     const passwordRecord = Password.build({
       domain,
+      account,
       password,
       userId: req.currentUser!.id,
       updatedAt,
@@ -33,8 +35,9 @@ router.post(
     await new PasswordSavedPublisher(natsWrapper.client).publish({
       id: passwordRecord.id,
       userId: req.currentUser!.id,
-      password: passwordRecord.password,
       domain: passwordRecord.domain,
+      account: passwordRecord.account,
+      password: passwordRecord.password,
       updatedAt: passwordRecord.updatedAt.toISOString(),
     });
     res.status(201).send(passwordRecord);

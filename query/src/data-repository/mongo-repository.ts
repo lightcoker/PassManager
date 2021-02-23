@@ -90,6 +90,7 @@ export default class MongoRepository extends BasicRepository<
     const userDoc = await this.getUser(user);
     const passwordRecord = await PasswordRecord.build({
       id: password.id,
+      account: password.account,
       password: password.password,
       userId: password.userId,
       domain: password.domain,
@@ -108,6 +109,7 @@ export default class MongoRepository extends BasicRepository<
       },
       {
         domain: password.domain,
+        account: password.account,
         password: password.password,
         updatedAt: new Date(password.updatedAt!),
       },

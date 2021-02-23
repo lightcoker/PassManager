@@ -13,6 +13,7 @@ const SavePage = ({ currentUser }) => {
 
   const router = useRouter();
   const [domain, setDomain] = useState("");
+  const [account, setAccount] = useState("");
   const [password, setPassword] = useState(router.query.password ?? "");
 
   const { doRequest, errors } = useRequest({
@@ -20,6 +21,7 @@ const SavePage = ({ currentUser }) => {
     method: "post",
     body: {
       domain,
+      account,
       password,
     },
     onSuccess: () => router.push("/password"),
@@ -52,6 +54,16 @@ const SavePage = ({ currentUser }) => {
                 value={domain}
                 onBlur={onBlur}
                 onChange={(e) => setDomain(e.target.value)}
+                className="input"
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Account</label>
+            <div className="control">
+              <input
+                value={account}
+                onChange={(e) => setAccount(e.target.value)}
                 className="input"
               />
             </div>

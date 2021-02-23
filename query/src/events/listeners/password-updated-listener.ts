@@ -12,11 +12,12 @@ export class PasswordUpdatedListener extends Listener<PasswordUpdatedEvent> {
   queueGroupName = queueGroupName;
 
   async onMessage(data: PasswordUpdatedEvent["data"], msg: Message) {
-    const { id, domain, password, userId, version, updatedAt } = data;
+    const { id, domain, account, password, userId, version, updatedAt } = data;
     const userObject = { id: userId };
     const passwordObject = {
       id,
       domain,
+      account,
       password,
       userId,
       version,

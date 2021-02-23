@@ -15,12 +15,14 @@ const EditPage = ({ passwordRecord, currentUser }) => {
 
   const router = useRouter();
   const [domain, setDomain] = useState(passwordRecord.domain);
+  const [account, setAccount] = useState(passwordRecord.account);
   const [password, setPassword] = useState(passwordRecord.password);
   const { doRequest, errors } = useRequest({
     url: `/api/password/${passwordRecord.id}`,
     method: "put",
     body: {
       domain,
+      account,
       password,
       updatedAt: new Date(),
     },
@@ -52,6 +54,17 @@ const EditPage = ({ passwordRecord, currentUser }) => {
                 value={domain}
                 onBlur={onBlur}
                 onChange={(e) => setDomain(e.target.value)}
+                className="input"
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Account</label>
+            <div className="control">
+              <input
+                value={account}
+                onChange={(e) => setAccount(e.target.value)}
+                type="text"
                 className="input"
               />
             </div>

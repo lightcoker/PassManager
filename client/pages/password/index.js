@@ -43,7 +43,14 @@ const PasswordsPage = ({ currentUser, passwords }) => {
   };
 
   const passwordCards = passwords.map((passwordRecord) => {
-    const { id, domain, password, updatedat, updatedAt } = passwordRecord;
+    const {
+      id,
+      domain,
+      account,
+      password,
+      updatedat,
+      updatedAt,
+    } = passwordRecord;
     return (
       <div key={id} className="card my-1 column is-8 is-offset-2">
         <div className="card-content">
@@ -51,6 +58,9 @@ const PasswordsPage = ({ currentUser, passwords }) => {
             <ul>
               <li>
                 <strong>Domain: </strong> {domain}
+              </li>
+              <li>
+                <strong>Account: </strong> {account}
               </li>
               <li>
                 <strong>Password: </strong> {password}

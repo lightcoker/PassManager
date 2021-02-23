@@ -51,6 +51,7 @@ class PostgresRepository extends BasicRepository<any, any> {
         id VARCHAR(255) PRIMARY KEY,
         userid VARCHAR(255) NOT NULL,
         domain VARCHAR(255) NOT NULL,
+        account VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         updatedat TIMESTAMP NOT NULL,
         version INT NOT NULL,
@@ -82,7 +83,7 @@ class PostgresRepository extends BasicRepository<any, any> {
 
   async getPasswords(user: User) {
     const userRecords = await this.client!.query(
-      `SELECT id, domain, password, updatedat
+      `SELECT id, domain, account, password, updatedat
         FROM passwordrecord
         WHERE userid=$1;`,
       [user.id]
@@ -92,7 +93,7 @@ class PostgresRepository extends BasicRepository<any, any> {
 
   async getPassword(user: User, password: Password) {
     const passwordRecord = await this.client!.query(
-      `SELECT id, domain, password, userId, updatedat
+      `SELECT id, domain, account, password, userId, updatedat
         FROM passwordrecord
         WHERE userid=$1 AND id=$2;`,
       [user.id, password.id]
@@ -101,24 +102,33 @@ class PostgresRepository extends BasicRepository<any, any> {
   }
 
   async insertPassword(user: User, password: Password) {
-    const { id, userId, domain, password: psw, updatedAt } = password;
+    const { id, userId, account, domain, password: psw, updatedAt } = password;
     await this.client!.query(
-      `INSERT INTO passwordrecord(id, userId, domain, password, updatedat, version) VALUES($1, $2, $3, $4, $5, $6);`,
-      [id, userId, domain, psw, updatedAt, 0]
+      `INSERT INTO passwordrecord(id, userId, domain, account, password, updatedat, version) VALUES($1, $2, $3, $4, $5, $6, $7);`,
+      [id, userId, account, domain, psw, updatedAt, 0]
     );
   }
 
   async updatePassword(user: User, password: Password) {
-    const { id, userId, domain, password: psw, updatedAt, version } = password;
+    const {
+      id,
+      userId,
+      domain,
+      account,
+      password: psw,
+      updatedAt,
+      version,
+    } = password;
     const updatedPassword = await this.client!.query(
       `UPDATE passwordrecord
-        SET domain=$1, 
-            password=$2, 
-            updatedat=$3, 
-            version=$4 
-        WHERE id=$5 AND version=$6
+        SET domain=$1,
+            account=$2,
+            password=$3, 
+            updatedat=$4, 
+            version=$5 
+        WHERE id=$6 AND version=$7
         RETURNING *;`,
-      [domain, psw, updatedAt, version!, id, version! - 1]
+      [domain, account, psw, updatedAt, version!, id, version! - 1]
     );
     if (updatedPassword.rows.length == 0) {
       throw new NotFoundError();

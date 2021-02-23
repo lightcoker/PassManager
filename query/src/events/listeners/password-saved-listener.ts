@@ -13,11 +13,12 @@ export class PasswordSavedListener extends Listener<PasswordSavedEvent> {
   queueGroupName = queueGroupName;
 
   async onMessage(data: PasswordSavedEvent["data"], msg: Message) {
-    const { id, domain, password, userId, updatedAt } = data;
+    const { id, domain, account, password, userId, updatedAt } = data;
     const userObject = { id: userId };
     const passwordObject = {
       id,
       domain,
+      account,
       password,
       userId,
       updatedAt: new Date(updatedAt),

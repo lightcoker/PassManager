@@ -5,6 +5,7 @@ export interface PasswordUpdatedEvent {
   data: {
     id: string;
     userId: string;
+    account: string;
     password: string;
     domain: string;
     updatedAt: string;
