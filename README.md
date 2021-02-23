@@ -4,7 +4,7 @@ A web application of password manager implemented by microservice architecture.
 
 Link: [https://www.albertapp.codes/](https://www.albertapp.codes/)
 
-## Motivation
+## Objective
 
 The goal of this project is to learn and implement system architecture and design patterns that I researched recently through learning by doing. It also serves as a demo of my skills in web development.
 
@@ -20,6 +20,39 @@ Continuous Integration/Continuous Deployment (CI/CD) is applied to introduce aut
 
 <img src="https://raw.githubusercontent.com/lightcoker/passmanager/main/doc/img/Systems%20Architecture.png" alt="Systems Architecture" style="zoom:6%;" />
 
+## Technologies
+
+##### Frontend service
+
+- Frontend framework: React & Next.js for server-side rendering (SSR)
+- CSS framework: Bulma 
+
+##### Authentication service
+
+- Backend framework: Node.js & Express with TypeScript
+- Persistent storage: MongoDB
+
+##### Password service
+
+- Backend framework: Node.js & Express with TypeScript
+- Persistent storage: MongoDB
+
+##### Query service
+
+- Backend framework: Node.js & Express with TypeScript
+- Persistent storage: PostgreSQL or MongoDB
+- In-memory cache: Redis
+
+##### Event bus
+
+- NATS streaming service
+
+##### CI/CD
+
+- Testing framework: Jest
+- CI platform: GitHub actions
+- Deployment: Kubernetes on DigitalOcean
+
 ## Architectural Pattern
 
 ##### Microservice Architecture
@@ -31,7 +64,7 @@ Continuous Integration/Continuous Deployment (CI/CD) is applied to introduce aut
 ##### CQRS
 
 - CQRS separates reads and writes into different logic units. Query unit is for read operation. while command unit is for other operations.
-  - The command unit includes authentication service and password service. Authentication service creates user records and password service creates and manage password records.
+  - The command unit includes authentication service and password service. Authentication service creates user records and password service creates and manages password records.
   - The query unit is the query service. It receives events when new records, including user and password records, are created or operated, and then store the copies in its database.
 - Not only the read and write operations are separated, but it also provides opportunities to devise them differently or optimizes them independently with mechanisms according to the corresponding operations. For example, MongoDB is applied in the command unit to optimize write operations. In the query service, PostgreSQL and in-memory cache are applied to optimize write operations.
 
