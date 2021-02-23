@@ -17,7 +17,7 @@ export default () => {
 
   return (
     <section className="columns is-multiline is-text-centered mt-2">
-      <div className="card column is-2 is-offset-5">
+      <div className="card column is-6 is-offset-3">
         <div className="has-text-centered card-content">Signing you out...</div>
       </div>
     </section>

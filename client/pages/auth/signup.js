@@ -24,7 +24,7 @@ export default () => {
 
   return (
     <section className="columns is-multiline is-text-centered mt-2">
-      <div className="card column is-2 is-offset-5">
+      <div className="card column is-6 is-offset-3">
         <form onSubmit={onSubmit} className="has-text-centered card-content">
           <h2 className="title is-2">Sign Up</h2>
           <div className="field">
