@@ -6,14 +6,14 @@ Link: [https://www.albertapp.codes/](https://www.albertapp.codes/)
 
 ## Contents
 
-1. [Objective](#objective)
-2. [Introduction](#introduction)
-3. [System Architecture](#system-architecture)
-4. [Technologies](#technologies)
-5. [Architectural Pattern](#architectural-pattern)
-6. [Design Pattern](#design-pattern)
-7. [CI/CD](#cicd-1)
-8. [Screenshot](#screenshot)
+- [Objective](#objective)
+- [Introduction](#introduction)
+- [System Architecture](#system-architecture)
+- [Technologies](#technologies)
+- [Architectural Pattern](#architectural-pattern)
+- [Design Pattern](#design-pattern)
+- [CI/CD](#cicd-1)
+- [Screenshot](#screenshot)
 
 ## Objective
 
