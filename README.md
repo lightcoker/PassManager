@@ -13,6 +13,7 @@ Link: [https://www.albertapp.codes/](https://www.albertapp.codes/)
 5. [Architectural Pattern](#architectural-pattern)
 6. [Design Pattern](#design-pattern)
 7. [CI/CD](#cicd-1)
+8. [Screenshot](#screenshot)
 
 ## Objective
 
@@ -93,3 +94,14 @@ Continuous Integration/Continuous Deployment (CI/CD) is applied to introduce aut
 
 ## Screenshot
 
+- Homepage: Users can generate a random password according to the chosen length. The default length is 32 characters.
+
+![homepage](https://raw.githubusercontent.com/lightcoker/passmanager/main/doc/img/Screenshot_homepage.png)
+
+- Save passwords: Users can save a password along with domain and account to their collection.
+
+![save password](https://raw.githubusercontent.com/lightcoker/passmanager/main/doc/img/Screenshot_save.png)
+
+- Manage passwords: Users could manage the their password collection, including add create, edit and delete password records.
+
+![manage passwords](https://raw.githubusercontent.com/lightcoker/passmanager/main/doc/img/Screenshot_manage.png)
