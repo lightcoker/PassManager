@@ -105,7 +105,7 @@ class PostgresRepository extends BasicRepository<any, any> {
     const { id, userId, account, domain, password: psw, updatedAt } = password;
     await this.client!.query(
       `INSERT INTO passwordrecord(id, userId, domain, account, password, updatedat, version) VALUES($1, $2, $3, $4, $5, $6, $7);`,
-      [id, userId, account, domain, psw, updatedAt, 0]
+      [id, userId, domain, account, psw, updatedAt, 0]
     );
   }
 
