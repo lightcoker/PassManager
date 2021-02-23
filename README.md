@@ -4,6 +4,16 @@ A web application of password manager implemented by microservice architecture.
 
 Link: [https://www.albertapp.codes/](https://www.albertapp.codes/)
 
+## Contents
+
+1. [Objective](#objective)
+2. [Introduction](#introduction)
+3. [System Architecture](#system-architecture)
+4. [Technologies](#technologies)
+5. [Architectural Pattern](#architectural-pattern)
+6. [Design Pattern](#design-pattern)
+7. [CI/CD](#cicd-1)
+
 ## Objective
 
 The goal of this project is to learn and implement system architecture and design patterns that I researched recently through learning by doing. It also serves as a demo of my skills in web development.
@@ -80,4 +90,6 @@ Continuous Integration/Continuous Deployment (CI/CD) is applied to introduce aut
 - Unit testing in the authentication service ensures any changes introduced would not break the overall application.
 - GitHub action is chosen as the CI platform to run tests and deploy the app to the cloud platform.
 - The app is deployed on the DigitalOcean Kubernetes (DOKS). 
+
+## Screenshot
 
