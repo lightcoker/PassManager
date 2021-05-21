@@ -2,8 +2,6 @@
 
 A web application of password manager implemented by microservice architecture.
 
-Link: [https://www.albertapp.codes/](https://www.albertapp.codes/)
-
 ## Contents
 
 - [Objective](#objective)
