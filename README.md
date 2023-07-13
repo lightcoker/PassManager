@@ -1,4 +1,4 @@
-# Passmanager
+![圖片](https://github.com/wdrbdev/PassManager/assets/34061170/5fb5c744-182d-4530-b756-1d1ffa480f69)# Passmanager
 
 A web application of password manager implemented by microservice architecture.
 
@@ -27,7 +27,7 @@ Continuous Integration/Continuous Deployment (CI/CD) is applied to introduce aut
 
 ## System Architecture
 
-<img src="https://raw.githubusercontent.com/lightcoker/passmanager/main/doc/img/Systems%20Architecture.png" alt="Systems Architecture" style="zoom:6%;" />
+<img src="https://github.com/wdrbdev/PassManager/blob/main/doc/img/Systems%20Architecture.png?raw=true" alt="Systems Architecture" style="zoom:6%;" />
 
 ## Technologies
 
@@ -94,12 +94,12 @@ Continuous Integration/Continuous Deployment (CI/CD) is applied to introduce aut
 
 - Homepage: Users can generate a random password according to the chosen length. The default length is 32 characters.
 
-![homepage](https://raw.githubusercontent.com/lightcoker/passmanager/main/doc/img/Screenshot_homepage.png)
+![homepage](https://github.com/wdrbdev/PassManager/blob/main/doc/img/Screenshot_homepage.png?raw=true)
 
 - Save passwords: Users can save a password along with domain and account to their collection.
 
-![save password](https://raw.githubusercontent.com/lightcoker/passmanager/main/doc/img/Screenshot_save.png)
+![save password](https://github.com/wdrbdev/PassManager/blob/main/doc/img/Screenshot_save.png?raw=true)
 
 - Manage passwords: Users could manage the their password collection, including add create, edit and delete password records.
 
-![manage passwords](https://raw.githubusercontent.com/lightcoker/passmanager/main/doc/img/Screenshot_manage.png)
+![manage passwords](https://github.com/wdrbdev/PassManager/blob/main/doc/img/Screenshot_manage.png?raw=true)
