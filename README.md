@@ -1,4 +1,4 @@
-![圖片](https://github.com/wdrbdev/PassManager/assets/34061170/5fb5c744-182d-4530-b756-1d1ffa480f69)# Passmanager
+# Passmanager
 
 A web application of password manager implemented by microservice architecture.
 
